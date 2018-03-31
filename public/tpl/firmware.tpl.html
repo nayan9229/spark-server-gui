@@ -1,0 +1,87 @@
+<div ng-controller="FirmwareCtrl">
+    <h1>Firmware</h1>
+    <p>
+        <button class="btn btn-success" data-toggle="modal" data-target="#newfirmware">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Upload
+        </button>
+    </p>
+	<div class="row">
+		<!-- <pre>{{firmwares | json}}</pre>
+		<pre>{{new_firmware | json}}</pre> -->
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h2 class="panel-title">Devices</h2>
+			</div>
+
+			<div class="panel-body events">
+				<div ng-show="firmwares.length == 0">
+					No Devices available.
+				</div>
+				<div ng-show="firmwares.length > 0">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Description</th>
+								<th>Version</th>
+								<th>Current</th>
+								<th>Size</th>
+								<th>ProductId</th>
+								<th>Updated</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="firmware in firmwares">
+								<td>{{firmware.title}}</td>
+								<td>{{firmware.description}}</td>
+								<td>{{firmware.version}}</td>
+								<td>{{firmware.current}}</td>
+								<td>{{firmware.size}}</td>
+								<td>{{firmware.product_id}}</td>
+								<td>{{firmware.updated_at}}</td>
+								<td><button type="button" class="btn btn-danger btn-xs" ng-click="deleteFirmware(firmware.version)"> <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete</button> <button type="button" class="btn btn-success btn-xs" ng-click="releaseFirmware(firmware, true)" ng-show="!{{firmware.current}}"> <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Release</button> <button type="button" class="btn btn-success btn-xs" ng-click="releaseFirmware(firmware, false)" ng-show="{{firmware.current}}"> <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Hold</button></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div> 
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="newfirmware" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Upload New Firmware Binary</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="version">Version:</label>
+						<input type="name" class="form-control" id="id" placeholder="1.0.0" name="id" ng-model="new_firmware.version">
+					</div>
+					<div class="form-group">
+						<label for="title">Title:</label>
+						<input type="name" class="form-control" id="id" placeholder="Title" name="id" ng-model="new_firmware.title">
+					</div>
+					<div class="form-group">
+						<label for="description">Description:</label>
+						<input type="name" class="form-control" id="id" placeholder="Description" name="id" ng-model="new_firmware.description">
+					</div>
+					<div class="form-group">
+						<label for="description">Select File:</label>
+						<input class="form-control" type="file" name="files" filelist-bind file-model="firmware_file">
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="newFirmware(new_firmware)">Upload</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

@@ -1,0 +1,74 @@
+<div ng-controller="DeviceNewCtrl">
+    <h1>Devices</h1>
+    <p>
+        <button class="btn btn-success" data-toggle="modal" data-target="#newdevice">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> NEW DEVICE
+        </button>
+    </p>
+    <div class="row">
+        <!-- <pre>{{devices | json}}</pre>     -->
+        <!-- <pre>{{new_device | json}}</pre>     -->
+        <!-- <pre>error = {{ error | json }}</pre> -->
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">Devices</h2>
+        </div>
+
+        <div class="panel-body events">
+          <div ng-show="devices.length == 0">
+              No Devices available.
+          </div>
+          <div ng-show="devices.length > 0">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Id</th>
+                  <th>Firmware</th>
+                  <th>Status</th>
+                  <th>Development</th>
+                  <th>Last Handshake</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="device in devices">
+                    <td><a href="/#/devices/{{selected_product_id}}/{{device.id}}">{{device.name}}</a></td>
+                    <td><a href="/#/devices/{{selected_product_id}}/{{device.id}}">{{device.id}}</a></td>
+                    <td>{{device.product_firmware_version}}</td>
+                    <td>{{device.status}}</td>
+                    <td>{{device.development}}</td>
+                    <td>{{device.last_heard}}</td>
+                    <td><div class="btn-group"><button type="button" class="btn btn-danger btn-xs" ng-click="deleteDevice(device.id)"> <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete</button></div></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div> 
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="newdevice" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">NEW DEVICE</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="name">Device ID:</label>
+              <input type="name" class="form-control" id="id" placeholder="123455abcde67890abcde1234" name="id" ng-model="new_device.id">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="newDevice(new_device)">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</div>
