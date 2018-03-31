@@ -1,4 +1,4 @@
-# spark-server-gui
+# Spark Server GUI
 
 Quick Install
 ==============
